@@ -1,0 +1,8 @@
+---
+postgres_container_name: some-postgres
+guacd_container_name: some-guacd
+guacamole_container_name: some-guacamole
+ldap_container_name: some-ldap
+ldap_base_domain: marvel.com
+ldap_base_dn: dc=marvel,dc=com
+ldap_root_passwd: mysupersecret

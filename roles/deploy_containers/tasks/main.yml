@@ -1,0 +1,4 @@
+---
+- name: Include deploy postgres container
+  ansible.builtin.import_tasks:
+    file: deploy_postgres.yml

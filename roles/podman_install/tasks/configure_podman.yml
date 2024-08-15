@@ -1,0 +1,6 @@
+---
+- name: Ensure registries is set only to docker.io
+  ansible.builtin.lineinfile:
+    path: /etc/containers/registries.conf
+    regexp: '^unqualified-search-registries ='
+    line: 'unqualified-search-registries = ["docker.io"]'

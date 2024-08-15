@@ -1,0 +1,8 @@
+---
+- name: Install packages
+  ansible.builtin.yum:
+    name:
+      - oracle-epel-release-el8.x86_64
+      - podman
+      - oniguruma
+    state: present

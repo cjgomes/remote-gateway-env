@@ -1,0 +1,20 @@
+---
+- name: Pull postgres image from Docker.io
+  containers.podman.podman_image:
+    name: postgres
+
+- name: Pull guacd image from Docker.io
+  containers.podman.podman_image:
+    name: guacd
+
+- name: Pull guacamole image from Docker.io
+  containers.podman.podman_image:
+    name: guacamole
+
+- name: Pull ldap image from Docker.io
+  containers.podman.podman_image:
+    name: osixia/openldap
+
+- name: Get initdb.sql file from guacamole container image
+  ansible.builtin.shell:
+    cmd: podman run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sql --postresql > initdb.sql
