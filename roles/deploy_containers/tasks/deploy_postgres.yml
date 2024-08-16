@@ -5,16 +5,86 @@
 
 - name: Pull guacd image from Docker.io
   containers.podman.podman_image:
-    name: guacd
+    name: guacamole/guacd
 
 - name: Pull guacamole image from Docker.io
   containers.podman.podman_image:
-    name: guacamole
+    name: guacamole/guacamole
 
 - name: Pull ldap image from Docker.io
   containers.podman.podman_image:
     name: osixia/openldap
 
+- name: Create directory /opt/containers
+  ansible.builtin.file:
+    path: /opt/containers
+    state: directory
+    mode: "655"
+
 - name: Get initdb.sql file from guacamole container image
   ansible.builtin.shell:
-    cmd: podman run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sql --postresql > initdb.sql
+    cmd: podman run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgresql > /opt/containers/initdb.sql
+
+- name: Create postgresql podman container
+  containers.podman.podman_container:
+    name: "{{ postgres_container_name }}"
+    image: postgres
+    state: started
+    security_opt: "label=disable"
+    ports:
+      - 5432:5432
+    volume:
+      - "/opt/containers:/docker-entrypoint-initdb.d"
+    env:
+      POSTGRES_PASSWORD: "{{ postgres_root_passwd }}"
+      POSTGRES_USER: "guacamole_user"
+      POSTGRES_DB: "guacamole_db"
+    generate_systemd:
+      path: /etc/systemd/system/
+      restart_policy: always
+
+- name: Create LDAP podman container
+  containers.podman.podman_container:
+    name: "{{ ldap_container_name }}"
+    image: osixia/openldap
+    state: started
+    ports:
+      - 389:389
+      - 636:636
+    env:
+      LDAP_ORGANISATION: "{{ ldap_organisation }}"
+      LDAP_DOMAIN: "{{ ldap_base_domain }}"
+      LDAP_ADMIN_PASSWORD: "{{ ldap_root_passwd }}"
+    generate_systemd:
+      path: /etc/systemd/system/
+      restart_policy: always
+
+- name: Create guacd podman container
+  containers.podman.podman_container:
+    name: "{{ guacd_container_name }}"
+    image: guacamole/guacd
+    state: started
+    ports:
+      - 4822:4822
+    generate_systemd:
+      path: /etc/systemd/system/
+      restart_policy: always
+
+- name: Create guacamole podman container
+  containers.podman.podman_container:
+    name: "{{ guacamole_container_name }}"
+    image: guacamole/guacamole
+    state: started
+    ports:
+      - 8080:8080
+    env:
+      GUACD_HOSTNAME: "{{ ansible_host }}"
+      GUACD_PORT: 4822
+      POSTGRESQL_HOSTNAME: "{{ ansible_host }}"
+      POSTGRESQL_PASSWORD: "{{ postgres_root_passwd }}"
+      POSTGRESQL_USER: "guacamole_user"
+      POSTGRESQL_DATABASE: "guacamole_db"
+      POSTGRESQL_PORT: 5432
+    generate_systemd:
+      path: /etc/systemd/system/
+      restart_policy: always
