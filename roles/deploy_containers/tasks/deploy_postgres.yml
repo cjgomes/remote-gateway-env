@@ -55,6 +55,9 @@
       LDAP_ORGANISATION: "{{ ldap_organisation }}"
       LDAP_DOMAIN: "{{ ldap_base_domain }}"
       LDAP_ADMIN_PASSWORD: "{{ ldap_root_passwd }}"
+      LDAP_READONLY_USER: true
+      LDAP_READONLY_USER_USERNAME: svc_guacamole
+      LDAP_READONLY_USER_PASSWORD: "{{ ldap_root_passwd }}"
     generate_systemd:
       path: /etc/systemd/system/
       restart_policy: always
@@ -85,6 +88,13 @@
       POSTGRESQL_USER: "guacamole_user"
       POSTGRESQL_DATABASE: "guacamole_db"
       POSTGRESQL_PORT: 5432
+      LDAP_HOSTNAME: "{{ ansible_host }}"
+      LDAP_PORT: 389
+      LDAP_ENCRYPTION_METHOD: "none"
+      LDAP_SEARCH_BIND_DN: "cn=svc_guacamole,{{ ldap_base_dn }}"
+      LDAP_SEARCH_BIND_PASSWORD: "{{ ldap_root_passwd }}"
+      LDAP_USER_BASE_DN: "{{ ldap_base_dn }}"
+      LDAP_GROUP_BASE_DN: "ou=Groups,{{ ldap_base_dn }}"
     generate_systemd:
       path: /etc/systemd/system/
       restart_policy: always

@@ -8,3 +8,5 @@ ldap_organisation: Marvel
 ldap_base_domain: marvel.com
 ldap_base_dn: dc=marvel,dc=com
 ldap_root_passwd: mysupersecret
+ldap_read_ldif: acl-read.ldif.j2
+ldap_server_path: /etc/ldap/

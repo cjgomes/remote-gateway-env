@@ -1,0 +1,20 @@
+---
+- name: Copy the ldif template to cn=config
+  ansible.builtin.template:
+    src: "{{ ldap_read_ldif }}"
+    dest: /tmp/
+  register: result
+
+- name: Check if acl is already changed
+  ansible.builtin.stat:
+    path: "{{ ldap_server_path }}/aclread_created"
+  register: rootdn_status
+
+- name: Copy ldif config to podman container
+  ansible.builtin.shell:
+    cmd: /usr/bin/podman cp "/tmp/{{ ldap_read_ldif }}" "{{ ldap_container_name }}:/tmp/"
+
+- name: Configure Administrators ldap group to read all entries
+  containers.podman.podman_container_exec:
+    name: "{{ ldap_container_name }}"
+    command: ldapmodify -Y EXTERNAL -H ldapi:/// -f "/tmp/{{ ldap_read_ldif }}"

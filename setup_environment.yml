@@ -1,5 +1,5 @@
 - name: Deploy Podman development environment
-  hosts: vm
+  hosts: podman-lab
   become: true
   roles:
     - podman_install

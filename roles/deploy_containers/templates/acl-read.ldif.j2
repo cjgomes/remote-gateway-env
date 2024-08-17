@@ -1,0 +1,11 @@
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth manage by * break
+olcAccess: {1}to attrs=userPassword,shadowLastChange by self write by dn="cn=admin,dc=marvel,dc=com" write by anonymous auth by * none
+olcAccess: {2} to * 
+  by self read
+  by dn="cn=admin,{{ ldap_base_dn }}" write
+  by dn="cn=svc_guacamole,{{ ldap_base_dn }}" read
+  by group.base="cn=administrators,ou=Groups,{{ ldap_base_dn }}" read
+  by * none
