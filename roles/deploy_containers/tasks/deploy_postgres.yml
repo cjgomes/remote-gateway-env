@@ -98,3 +98,23 @@
     generate_systemd:
       path: /etc/systemd/system/
       restart_policy: always
+
+- name: Enable postgresql container systemd
+  ansible.builtin.systemd_service:
+    name: "container-{{ postgres_container_name }}"
+    enabled: true
+
+- name: Enable openldap container systemd
+  ansible.builtin.systemd_service:
+    name: "container-{{ ldap_container_name }}"
+    enabled: true
+
+- name: Enable guacd container systemd
+  ansible.builtin.systemd_service:
+    name: "container-{{ guacd_container_name }}"
+    enabled: true
+
+- name: Enable guacamole container systemd
+  ansible.builtin.systemd_service:
+    name: "container-{{ guacamole_container_name }}"
+    enabled: true
