@@ -1,0 +1,10 @@
+---
+- name: Install packages
+  ansible.builtin.yum:
+    name:
+      - oracle-epel-release-el8.x86_64
+      - podman
+      - oniguruma
+      - openldap-clients
+      - python3-ldap
+    state: present

@@ -1,0 +1,28 @@
+---
+- name: Copy the ldif template to cn=config
+  ansible.builtin.template:
+    src: "{{ ldap_read_ldif }}"
+    dest: /tmp/
+  register: result
+
+- name: Copy ldif config to podman container
+  ansible.builtin.shell:
+    cmd: /usr/bin/podman cp "/tmp/{{ ldap_read_ldif }}" "{{ ldap_container_name }}:/tmp/"
+
+- name: Check if cn=config is already configured
+  ansible.builtin.stat:
+    path: "/tmp/aclread_created"
+  register: file_aclread
+
+- name: Change ldap cn=config to administrator read
+  containers.podman.podman_container_exec:
+    name: "{{ ldap_container_name }}"
+    command: ldapmodify -Y EXTERNAL -H ldapi:/// -f "/tmp/{{ ldap_read_ldif }}"
+  register: ldap_config
+  when: not file_aclread.stat.exists
+
+- name: Create flag ldap config changed succesfully
+  ansible.builtin.command: touch /tmp/aclread_created
+  when:
+    - ldap_config.rc is defined
+    - ldap_config.rc == 0

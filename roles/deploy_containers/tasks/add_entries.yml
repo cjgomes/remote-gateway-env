@@ -1,0 +1,692 @@
+---
+- name: Add the organizationalUnit Groups
+  ldap_entry:
+    dn: "ou=Groups,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - organizationalUnit
+    attributes:
+      description: "Group entries"
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+- name: Add the organizationalUnit People
+  community.general.ldap_entry:
+    dn: "ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - organizationalUnit
+    attributes:
+      description: "User entries"
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+- name: Add Administrators Group and members
+  community.general.ldap_entry:
+    dn: "cn=administrators,ou=Groups,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - groupOfNames
+    attributes:
+      cn: "Administrators"
+      member:
+        - "uid=jeangrey,ou=People,{{ ldap_base_dn }}"
+        - "uid=xavier,ou=People,{{ ldap_base_dn }}"
+        - "uid=nickfury,ou=People,{{ ldap_base_dn }}"
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Avengers Group and members
+  community.general.ldap_entry:
+    dn: "cn=Avengers,ou=Groups,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - groupOfNames
+    attributes:
+      cn: "Avengers"
+      member:
+        - "uid=ironman,ou=People,{{ ldap_base_dn }}"
+        - "uid=captainamerica,ou=People,{{ ldap_base_dn }}"
+        - "uid=blackwidow,ou=People,{{ ldap_base_dn }}"
+        - "uid=thor,ou=People,{{ ldap_base_dn }}"
+        - "uid=hulk,ou=People,{{ ldap_base_dn }}"
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add FantasticFour Group and members
+  community.general.ldap_entry:
+    dn: "cn=FantasticFour,ou=Groups,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - groupOfNames
+    attributes:
+      cn: "FantasticFour"
+      member:
+        - "uid=mrfantastic,ou=People,{{ ldap_base_dn }}"
+        - "uid=invisiblewoman,ou=People,{{ ldap_base_dn }}"
+        - "uid=thing,ou=People,{{ ldap_base_dn }}"
+        - "uid=humantorch,ou=People,{{ ldap_base_dn }}"
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Asgardians Group and members
+  community.general.ldap_entry:
+    dn: "cn=Asgardians,ou=Groups,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - groupOfNames
+    attributes:
+      cn: "Asgardians"
+      member:
+        - "uid=thor,ou=People,{{ ldap_base_dn }}"
+        - "uid=loki,ou=People,{{ ldap_base_dn }}"
+        - "uid=odin,ou=People,{{ ldap_base_dn }}"
+        - "uid=sif,ou=People,{{ ldap_base_dn }}"
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+- name: Add GuardiansOfTheGalaxy Group and members
+  community.general.ldap_entry:
+    dn: "cn=GuardiansOfTheGalaxy,ou=Groups,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - groupOfNames
+    attributes:
+      cn: "GuardiansOfTheGalaxy"
+      member:
+        - "uid=star-lord,ou=People,{{ ldap_base_dn }}"
+        - "uid=gamora,ou=People,{{ ldap_base_dn }}"
+        - "uid=rocket,ou=People,{{ ldap_base_dn }}"
+        - "uid=drax,ou=People,{{ ldap_base_dn }}"
+        - "uid=mantis,ou=People,{{ ldap_base_dn }}"
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+- name: Add X-Men Group and members
+  community.general.ldap_entry:
+    dn: "cn=X-Men,ou=Groups,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - groupOfNames
+    attributes:
+      cn: "X-Men"
+      member:
+        - "uid=chavier,ou=People,{{ ldap_base_dn }}"
+        - "uid=netuno,ou=People,{{ ldap_base_dn }}"
+        - "uid=jeangray,ou=People,{{ ldap_base_dn }}"
+        - "uid=cyclope,ou=People,{{ ldap_base_dn }}"
+        - "uid=fera,ou=People,{{ ldap_base_dn }}"
+        - "uid=wolverine,ou=People,{{ ldap_base_dn }}"
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Iron Man entry
+  community.general.ldap_entry:
+    dn: "uid=ironman,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "ironman"
+      cn: "Tony Stark"
+      sn: "Stark"
+      givenName: "Tony"
+      displayName: "Iron Man"
+      mail: "tony.stark@starkindustries.com"
+      userPassword: "IAmIronMan"
+      description: "Genius, billionaire, playboy, philanthropist."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Captain America entry
+  community.general.ldap_entry:
+    dn: "uid=captainamerica,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "captainamerica"
+      cn: "Steve Rogers"
+      sn: "Rogers"
+      givenName: "Steve"
+      displayName: "Captain America"
+      mail: "steve.rogers@shield.gov"
+      userPassword: "ICanDoThisAllDay"
+      description: "Super-soldier, leader of the Avengers."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Black Widow entry
+  community.general.ldap_entry:
+    dn: "uid=blackwidow,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "blackwidow"
+      cn: "Natasha Romanoff"
+      sn: "Romanoff"
+      givenName: "Natasha"
+      displayName: "Black Widow"
+      mail: "natasha.romanoff@shield.gov"
+      userPassword: "BestThereIs"
+      description: "Skilled spy and martial artist."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Thor entry
+  community.general.ldap_entry:
+    dn: "uid=thor,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "thor"
+      cn: "Thor Odinson"
+      sn: "Odinson"
+      givenName: "Thor"
+      displayName: "Thor"
+      mail: "thor.odinson@asgard.com"
+      userPassword: "BringTheThunder"
+      description: "God of Thunder, protector of Asgard."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Hulk entry
+  community.general.ldap_entry:
+    dn: "uid=hulk,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "hulk"
+      cn: "Bruce Banner"
+      sn: "Banner"
+      givenName: "Bruce"
+      displayName: "Hulk"
+      mail: "bruce.banner@starkindustries.com"
+      userPassword: "HulkSmash"
+      description: "Scientist with immense strength."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Mr. Fantastic entry
+  community.general.ldap_entry:
+    dn: "uid=mrfantastic,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "mrfantastic"
+      cn: "Reed Richards"
+      sn: "Richards"
+      givenName: "Reed"
+      displayName: "Mr. Fantastic"
+      mail: "reed.richards@fantasticfour.com"
+      userPassword: "StretchyMan"
+      description: "Leader of the Fantastic Four, genius scientist."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Invisible Woman entry
+  community.general.ldap_entry:
+    dn: "uid=invisiblewoman,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "invisiblewoman"
+      cn: "Susan Storm"
+      sn: "Storm"
+      givenName: "Susan"
+      displayName: "Invisible Woman"
+      mail: "susan.storm@fantasticfour.com"
+      userPassword: "InvisibleForce"
+      description: "Member of the Fantastic Four with invisibility powers."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add The Thing entry
+  community.general.ldap_entry:
+    dn: "uid=thing,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "thing"
+      cn: "Benjamin Grimm"
+      sn: "Grimm"
+      givenName: "Benjamin"
+      displayName: "The Thing"
+      mail: "benjamin.grimm@fantasticfour.com"
+      userPassword: "ItsClobberinTime"
+      description: "Member of the Fantastic Four with superhuman strength."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Human Torch entry
+  community.general.ldap_entry:
+    dn: "uid=humantorch,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "humantorch"
+      cn: "Johnny Storm"
+      sn: "Storm"
+      givenName: "Johnny"
+      displayName: "Human Torch"
+      mail: "johnny.storm@fantasticfour.com"
+      userPassword: "FlameOn"
+      description: "Member of the Fantastic Four with pyrokinetic abilities."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Loki entry
+  community.general.ldap_entry:
+    dn: "uid=loki,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "loki"
+      cn: "Loki Laufeyson"
+      sn: "Laufeyson"
+      givenName: "Loki"
+      displayName: "Loki"
+      mail: "loki.laufeyson@asgard.com"
+      userPassword: "MischiefMaker"
+      description: "God of Mischief, adoptive brother of Thor."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Odin entry
+  community.general.ldap_entry:
+    dn: "uid=odin,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "odin"
+      cn: "Odin Allfather"
+      sn: "Allfather"
+      givenName: "Odin"
+      displayName: "Odin"
+      mail: "odin.allfather@asgard.com"
+      userPassword: "AllFatherKnows"
+      description: "King of Asgard, father of Thor and Loki."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Sif entry
+  community.general.ldap_entry:
+    dn: "uid=sif,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "sif"
+      cn: "Sif"
+      sn: "Sif"
+      givenName: "Sif"
+      displayName: "Sif"
+      mail: "sif@asgard.com"
+      userPassword: "WarriorHeart"
+      description: "Asgardian warrior, ally of Thor."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Star-Lord entry
+  community.general.ldap_entry:
+    dn: "uid=star-lord,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "star-lord"
+      cn: "Peter Quill"
+      sn: "Quill"
+      givenName: "Peter"
+      displayName: "Star-Lord"
+      mail: "peter.quill@guardians.com"
+      userPassword: "IAmStarLord"
+      description: "Leader of the Guardians of the Galaxy."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Gamora entry
+  community.general.ldap_entry:
+    dn: "uid=gamora,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "gamora"
+      cn: "Gamora"
+      sn: "-"
+      givenName: "Gamora"
+      displayName: "Gamora"
+      mail: "gamora@guardians.com"
+      userPassword: "IAmGamer"
+      description: "Deadliest woman in the galaxy."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Rocket entry
+  community.general.ldap_entry:
+    dn: "uid=rocket,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "rocket"
+      cn: "Rocket Raccoon"
+      sn: "Raccoon"
+      givenName: "Rocket"
+      displayName: "Rocket"
+      mail: "rocket@guardians.com"
+      userPassword: "RocketRaccoon"
+      description: "Genius inventor and raccoon."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Drax entry
+  community.general.ldap_entry:
+    dn: "uid=drax,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "drax"
+      cn: "Drax the Destroyer"
+      sn: "Destroyer"
+      givenName: "Drax"
+      displayName: "Drax"
+      mail: "drax@guardians.com"
+      userPassword: "Destroyer"
+      description: "Warrior with a thirst for vengeance."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Groot entry
+  community.general.ldap_entry:
+    dn: "uid=groot,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "groot"
+      cn: "Groot"
+      sn: "Groot"
+      givenName: "Groot"
+      displayName: "Groot"
+      mail: "groot@guardians.com"
+      userPassword: "IAmGroot"
+      description: "Flora colossus and member of the Guardians."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Charles Xavier entry
+  community.general.ldap_entry:
+    dn: "uid=xavier,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "xavier"
+      cn: "Charles Xavier"
+      sn: "Xavier"
+      givenName: "Charles"
+      displayName: "Professor X"
+      mail: "charles.xavier@xmen.com"
+      userPassword: "MindControl"
+      description: "Leader of the X-Men, telepath."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Namor McKenzie entry
+  community.general.ldap_entry:
+    dn: "uid=netuno,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "netuno"
+      cn: "Namor McKenzie"
+      sn: "McKenzie"
+      givenName: "Namor"
+      displayName: "Netuno"
+      mail: "namor.mckenzie@xmen.com"
+      userPassword: "KingOfAtlantis"
+      description: "Mutant with powers of the sea."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Jean Grey entry
+  community.general.ldap_entry:
+    dn: "uid=jeangrey,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "jeangrey"
+      cn: "Jean Grey"
+      sn: "Grey"
+      givenName: "Jean"
+      displayName: "Jean Grey"
+      mail: "jean.grey@xmen.com"
+      userPassword: "PhoenixForce"
+      description: "Telepathic and telekinetic mutant."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Scott Summers entry
+  community.general.ldap_entry:
+    dn: "uid=cyclope,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "cyclope"
+      cn: "Scott Summers"
+      sn: "Summers"
+      givenName: "Scott"
+      displayName: "Cyclope"
+      mail: "scott.summers@xmen.com"
+      userPassword: "OpticBlast"
+      description: "Leader of the X-Men with optic blasts."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Hank McCoy entry
+  community.general.ldap_entry:
+    dn: "uid=beast,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "beast"
+      cn: "Hank McCoy"
+      sn: "McCoy"
+      givenName: "Hank"
+      displayName: "Beast"
+      mail: "hank.mccoy@xmen.com"
+      userPassword: "BeastMode"
+      description: "Genius-level intellect and superhuman strength."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Logan entry
+  community.general.ldap_entry:
+    dn: "uid=wolverine,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "wolverine"
+      cn: "Logan"
+      sn: "-"
+      givenName: "Logan"
+      displayName: "Wolverine"
+      mail: "logan@xmen.com"
+      userPassword: "AdamantiumClaws"
+      description: "Mutant with healing factor and adamantium claws."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
+
+
+- name: Add Nick Fury entry
+  community.general.ldap_entry:
+    dn: "uid=nickfury,ou=People,{{ ldap_base_dn }}"
+    objectClass:
+      - top
+      - person
+      - organizationalPerson
+      - inetOrgPerson
+    attributes:
+      uid: "nickfury"
+      cn: "Nick Fury"
+      sn: "Fury"
+      givenName: "Nick"
+      displayName: "Nick Fury"
+      mail: "nick.fury@shield.gov"
+      userPassword: "TheWorldIsYours"
+      description: "Director of SHIELD, has access to all groups."
+    state: present
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base_dn }}"
+    bind_pw: "{{ ldap_root_passwd }}"
