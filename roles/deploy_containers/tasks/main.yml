@@ -1,7 +1,7 @@
 ---
 - name: Include deploy postgres container
   ansible.builtin.import_tasks:
-    file: deploy_postgres.yml
+    file: deploy_environment.yml
 
 - name: Add marvel heroes to ldap
   ansible.builtin.import_tasks:
