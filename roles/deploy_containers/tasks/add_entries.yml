@@ -148,6 +148,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "ironman"
       cn: "Tony Stark"
@@ -157,6 +158,10 @@
       mail: "tony.stark@starkindustries.com"
       userPassword: "IAmIronMan"
       description: "Genius, billionaire, playboy, philanthropist."
+      uidNumber: "1010"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/ironman"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -171,6 +176,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "captainamerica"
       cn: "Steve Rogers"
@@ -180,6 +186,10 @@
       mail: "steve.rogers@shield.gov"
       userPassword: "ICanDoThisAllDay"
       description: "Super-soldier, leader of the Avengers."
+      uidNumber: "1011"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/captainamerica"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -194,6 +204,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "blackwidow"
       cn: "Natasha Romanoff"
@@ -203,6 +214,10 @@
       mail: "natasha.romanoff@shield.gov"
       userPassword: "BestThereIs"
       description: "Skilled spy and martial artist."
+      uidNumber: "1012"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/blackwidow"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -217,6 +232,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "thor"
       cn: "Thor Odinson"
@@ -226,6 +242,10 @@
       mail: "thor.odinson@asgard.com"
       userPassword: "BringTheThunder"
       description: "God of Thunder, protector of Asgard."
+      uidNumber: "1013"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/thor"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -240,6 +260,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "hulk"
       cn: "Bruce Banner"
@@ -247,8 +268,12 @@
       givenName: "Bruce"
       displayName: "Hulk"
       mail: "bruce.banner@starkindustries.com"
-      userPassword: "HulkSmash"
+      userPassword: "HUlkSmash"
       description: "Scientist with immense strength."
+      uidNumber: "1014"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/hulk"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -263,6 +288,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "mrfantastic"
       cn: "Reed Richards"
@@ -272,6 +298,10 @@
       mail: "reed.richards@fantasticfour.com"
       userPassword: "StretchyMan"
       description: "Leader of the Fantastic Four, genius scientist."
+      uidNumber: "1015"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/mrfantastic"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -286,6 +316,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "invisiblewoman"
       cn: "Susan Storm"
@@ -295,6 +326,10 @@
       mail: "susan.storm@fantasticfour.com"
       userPassword: "InvisibleForce"
       description: "Member of the Fantastic Four with invisibility powers."
+      uidNumber: "1016"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/invisiblewoman"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -309,6 +344,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "thing"
       cn: "Benjamin Grimm"
@@ -318,6 +354,10 @@
       mail: "benjamin.grimm@fantasticfour.com"
       userPassword: "ItsClobberinTime"
       description: "Member of the Fantastic Four with superhuman strength."
+      uidNumber: "1017"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/thing"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -332,6 +372,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "humantorch"
       cn: "Johnny Storm"
@@ -341,6 +382,10 @@
       mail: "johnny.storm@fantasticfour.com"
       userPassword: "FlameOn"
       description: "Member of the Fantastic Four with pyrokinetic abilities."
+      uidNumber: "1018"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/humantorch"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -355,6 +400,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "loki"
       cn: "Loki Laufeyson"
@@ -364,6 +410,10 @@
       mail: "loki.laufeyson@asgard.com"
       userPassword: "MischiefMaker"
       description: "God of Mischief, adoptive brother of Thor."
+      uidNumber: "1019"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/loki"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -378,6 +428,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "odin"
       cn: "Odin Allfather"
@@ -387,6 +438,10 @@
       mail: "odin.allfather@asgard.com"
       userPassword: "AllFatherKnows"
       description: "King of Asgard, father of Thor and Loki."
+      uidNumber: "1020"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/odin"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -401,6 +456,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "sif"
       cn: "Sif"
@@ -410,6 +466,10 @@
       mail: "sif@asgard.com"
       userPassword: "WarriorHeart"
       description: "Asgardian warrior, ally of Thor."
+      uidNumber: "1021"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/sif"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -424,6 +484,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "star-lord"
       cn: "Peter Quill"
@@ -433,6 +494,10 @@
       mail: "peter.quill@guardians.com"
       userPassword: "IAmStarLord"
       description: "Leader of the Guardians of the Galaxy."
+      uidNumber: "1022"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/start-lord"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -447,6 +512,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "gamora"
       cn: "Gamora"
@@ -456,6 +522,10 @@
       mail: "gamora@guardians.com"
       userPassword: "IAmGamer"
       description: "Deadliest woman in the galaxy."
+      uidNumber: "1023"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/gamora"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -470,6 +540,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "rocket"
       cn: "Rocket Raccoon"
@@ -479,6 +550,10 @@
       mail: "rocket@guardians.com"
       userPassword: "RocketRaccoon"
       description: "Genius inventor and raccoon."
+      uidNumber: "1024"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/rocket"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -493,6 +568,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "drax"
       cn: "Drax the Destroyer"
@@ -502,6 +578,10 @@
       mail: "drax@guardians.com"
       userPassword: "Destroyer"
       description: "Warrior with a thirst for vengeance."
+      uidNumber: "1025"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/drax"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -516,6 +596,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "groot"
       cn: "Groot"
@@ -525,6 +606,10 @@
       mail: "groot@guardians.com"
       userPassword: "IAmGroot"
       description: "Flora colossus and member of the Guardians."
+      uidNumber: "1026"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/groot"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -539,6 +624,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "xavier"
       cn: "Charles Xavier"
@@ -548,6 +634,10 @@
       mail: "charles.xavier@xmen.com"
       userPassword: "MindControl"
       description: "Leader of the X-Men, telepath."
+      uidNumber: "1027"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/xavier"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -562,6 +652,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "netuno"
       cn: "Namor McKenzie"
@@ -571,6 +662,10 @@
       mail: "namor.mckenzie@xmen.com"
       userPassword: "KingOfAtlantis"
       description: "Mutant with powers of the sea."
+      uidNumber: "1028"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/netuno"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -585,6 +680,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "jeangrey"
       cn: "Jean Grey"
@@ -594,6 +690,10 @@
       mail: "jean.grey@xmen.com"
       userPassword: "PhoenixForce"
       description: "Telepathic and telekinetic mutant."
+      uidNumber: "1029"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/jeangrey"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -608,6 +708,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "cyclope"
       cn: "Scott Summers"
@@ -617,6 +718,10 @@
       mail: "scott.summers@xmen.com"
       userPassword: "OpticBlast"
       description: "Leader of the X-Men with optic blasts."
+      uidNumber: "1030"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/cyclope"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -631,6 +736,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "beast"
       cn: "Hank McCoy"
@@ -640,6 +746,10 @@
       mail: "hank.mccoy@xmen.com"
       userPassword: "BeastMode"
       description: "Genius-level intellect and superhuman strength."
+      uidNumber: "1031"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/beast"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -654,6 +764,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "wolverine"
       cn: "Logan"
@@ -663,6 +774,10 @@
       mail: "logan@xmen.com"
       userPassword: "AdamantiumClaws"
       description: "Mutant with healing factor and adamantium claws."
+      uidNumber: "1032"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/wolverine"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
@@ -677,6 +792,7 @@
       - person
       - organizationalPerson
       - inetOrgPerson
+      - posixAccount
     attributes:
       uid: "nickfury"
       cn: "Nick Fury"
@@ -686,6 +802,10 @@
       mail: "nick.fury@shield.gov"
       userPassword: "TheWorldIsYours"
       description: "Director of SHIELD, has access to all groups."
+      uidNumber: "1033"
+      gidNumber: "1001"
+      loginShell: "/bin/bash"
+      homeDirectory: "/home/nickfury"
     state: present
     server_uri: ldap://localhost/
     bind_dn: "cn=admin,{{ ldap_base_dn }}"
