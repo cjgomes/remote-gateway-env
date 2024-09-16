@@ -268,7 +268,7 @@
       givenName: "Bruce"
       displayName: "Hulk"
       mail: "bruce.banner@starkindustries.com"
-      userPassword: "HUlkSmash"
+      userPassword: "HulkSmash"
       description: "Scientist with immense strength."
       uidNumber: "1014"
       gidNumber: "1001"

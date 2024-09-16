@@ -6,3 +6,4 @@
   roles:
     - podman_install
     - deploy_containers
+    - configure_guacamole

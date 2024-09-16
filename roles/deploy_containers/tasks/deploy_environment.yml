@@ -21,6 +21,14 @@
     state: directory
     mode: "655"
 
+- name: Create directory /opt/records
+  ansible.builtin.file:
+    path: /opt/records
+    state: directory
+    owner: "1000"
+    group: "1001"
+    mode: "770"
+
 - name: Get initdb.sql file from guacamole container image
   ansible.builtin.shell:
     cmd: podman run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgresql > /opt/containers/initdb.sql
@@ -69,6 +77,9 @@
     state: started
     ports:
       - 4822:4822
+    volume:
+      - "/opt/records:/var/lib/guacamole/recordings"
+    security_opt: "label=disable"
     generate_systemd:
       path: /etc/systemd/system/
       restart_policy: always
@@ -80,6 +91,9 @@
     state: started
     ports:
       - 8080:8080
+    volume:
+      - "/opt/records:/var/lib/guacamole/recordings"
+    security_opt: "label=disable"
     env:
       GUACD_HOSTNAME: "{{ ansible_host }}"
       GUACD_PORT: 4822
@@ -95,6 +109,7 @@
       LDAP_SEARCH_BIND_PASSWORD: "{{ ldap_root_passwd }}"
       LDAP_USER_BASE_DN: "{{ ldap_base_dn }}"
       LDAP_GROUP_BASE_DN: "ou=Groups,{{ ldap_base_dn }}"
+      RECORDING_SEARCH_PATH: "/var/lib/guacamole/recordings"
     generate_systemd:
       path: /etc/systemd/system/
       restart_policy: always

@@ -2,7 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'generic/oracle8'  # Substitua por "oracle9" quando disponível
+  config.vm.box = 'generic/oracle8'
+  config.vm.hostname = "podman-lab"
 
   config.vm.provider 'libvirt' do |libvirt|
     libvirt.memory = 2048

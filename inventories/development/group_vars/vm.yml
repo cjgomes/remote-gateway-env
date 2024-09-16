@@ -8,3 +8,4 @@ ldap_base_domain: marvel.com
 ldap_base_dn: dc=marvel,dc=com
 ldap_read_ldif: acl-read.ldif.j2
 ldap_server_path: /etc/ldap/
+guacamole_uri: "http://{{ ansible_host }}:8080/guacamole"
