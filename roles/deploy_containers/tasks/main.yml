@@ -2,11 +2,3 @@
 - name: Include deploy postgres container
   ansible.builtin.import_tasks:
     file: deploy_environment.yml
-
-- name: Add marvel heroes to ldap
-  ansible.builtin.import_tasks:
-    file: add_entries.yml
-
-- name: Set Administrators Group ldap permissions
-  ansible.builtin.import_tasks:
-    file: set_read_administrators.yml
