@@ -1,0 +1,8 @@
+---
+- name: Add ldap entries
+  ansible.builtin.import_tasks:
+    file: add_ldap_entries.yml
+
+- name: Configure ldap acl
+  ansible.builtin.import_tasks:
+    file: set_read_administrators.yml
