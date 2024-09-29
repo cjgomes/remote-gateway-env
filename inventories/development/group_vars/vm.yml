@@ -1,4 +1,5 @@
 ---
+guacamole_pod: guacpod
 postgres_container_name: some-postgres
 guacd_container_name: some-guacd
 guacamole_container_name: some-guacamole

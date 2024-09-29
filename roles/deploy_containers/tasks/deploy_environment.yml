@@ -33,14 +33,23 @@
   ansible.builtin.shell:
     cmd: podman run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgresql > /opt/containers/initdb.sql
 
+- name: Create guacamole pod
+  containers.podman.podman_pod:
+    name: "{{ guacamole_pod }}"
+    network_alias: guacamole
+    publish:
+      - 8080:8080
+      - 4822:4822
+      - 5432:5432
+    state: started
+
 - name: Create postgresql podman container
   containers.podman.podman_container:
     name: "{{ postgres_container_name }}"
+    pod: "{{ guacamole_pod }}"
     image: postgres
     state: started
     security_opt: "label=disable"
-    ports:
-      - 5432:5432
     volume:
       - "/opt/containers:/docker-entrypoint-initdb.d"
     env:
@@ -73,10 +82,9 @@
 - name: Create guacd podman container
   containers.podman.podman_container:
     name: "{{ guacd_container_name }}"
+    pod: "{{ guacamole_pod }}"
     image: guacamole/guacd
     state: started
-    ports:
-      - 4822:4822
     volume:
       - "/opt/records:/var/lib/guacamole/recordings"
     security_opt: "label=disable"
@@ -87,10 +95,9 @@
 - name: Create guacamole podman container
   containers.podman.podman_container:
     name: "{{ guacamole_container_name }}"
+    pod: "{{ guacamole_pod }}"
     image: guacamole/guacamole
     state: started
-    ports:
-      - 8080:8080
     volume:
       - "/opt/records:/var/lib/guacamole/recordings"
     security_opt: "label=disable"
