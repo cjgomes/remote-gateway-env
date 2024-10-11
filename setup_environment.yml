@@ -1,5 +1,5 @@
 - name: Deploy Podman development environment
-  hosts: podman-lab
+  hosts: guacamole-lab
   become: true
   vars_files:
     - inventories/development/group_vars/secret.yml
